@@ -5,7 +5,9 @@ Tools and examples for IoT devices and data
 Tools to retrieve and monitor sensor data collected by acurite
 
 #### grab_data.py
-Pulls daily data from a list of sensors
+Pulls daily data from a list of sensors. Dumps data to files in data directory using friendly name you assign to device IDs.
+
+To configure add your base station ID and device IDs then run.
 
 Help:
 ```python

@@ -1,10 +1,24 @@
 import argparse
 from datetime import date, timedelta
 
+import requests
+
+baseUrl = 'https://dataapi.myacurite.com/mar-sensor-readings/'
+baseId = None # ID of your base station
+deviceIds = {} # Dictionary mapping friendly names to device IDs
+interval = '5m-summaries' # daily summary every 5 minutes 
 
 def grab_data(dataDate):
-    print(f'Retrieving data from {dataDate}')
+    for device, devId in deviceIds.items():
+        urlPath = f"{baseUrl}{baseId}-{devId}/{report}/{dataDate}.json"
+        print(urlPath)
+        resp = requests.get(urlPath)
+        filePath = f'data/{dataDate}-{device}.json'
+        print(filePath)
+        #print(resp.text)
 
+        with open(filePath, "w") as dataOut:
+            dataOut.write(resp.text)
 
 if __name__ == "__main__":
 
